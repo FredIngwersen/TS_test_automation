@@ -1,10 +1,10 @@
 import unittest
+import sys
 import time
 from selenium import webdriver
-# For data input
 from selenium.webdriver.common.keys import Keys
-# For custom configurations in Chrome
 from selenium.webdriver.chrome.options import Options
+from user_login import Login
 
 # --------------------------------------------------------------------------#
 
@@ -25,19 +25,16 @@ class Login_TS_iOS_Chrome(unittest.TestCase):
         # Create driver, pass in the chrome options
         self.driver = webdriver.Chrome(chrome_options=chrome_options)
 
-
     # Test the user login
     def test_user_login(self):
-
         driver = self.driver
 
         # Goto trendsales mobile page
         driver.get('https://m.trendsales.dk/')
 
-        self.assertIn("Trendsales", driver.title)
-
-        # Sleep for a moment to ensure that configurations in chrome are present
-        time.sleep(5)
+        # Use the Login class to login
+        login = Login(driver)
+        login.user_login()
 
 
     # Anything declared in tearDown will be executed for all test
