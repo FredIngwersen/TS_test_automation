@@ -24,3 +24,7 @@ class Login(object):
         self.driver.find_element_by_xpath("//input[@data-qa-name='login-password']").send_keys(data["password"])
         self.driver.find_element_by_xpath("//a[@data-qa-name='login-submit']").click()
         time.sleep(2)
+
+        # Assert login was successful
+        assert data["username"] in self.driver.find_element_by_xpath("//div[@data-qa-name='title']/div[contains(text(),'{}')]".format(data["username"])).text
+        print("User login is functional")
