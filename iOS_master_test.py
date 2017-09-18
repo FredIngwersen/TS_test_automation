@@ -39,6 +39,15 @@ class Master_Test_TS_iOS_Chrome(unittest.TestCase):
         # Use the Login class to login
         Login(driver).user_login()
 
+        # Use the Verify class to verify some elements
+        Verify(driver).landing()
+        # Goto search 
+        #self.driver.find_element_by_xpath("//a[@data-qa-name='nav-search']").click()
+        driver.get('https://m.trendsales.dk/')
+        Verify(driver).listings()
+        Verify(driver).toggle()
+        Verify(driver).search_bar()
+        Verify(driver).filters()
 
     # Anything declared in tearDown will be executed for all test
     def tearDown(self):
