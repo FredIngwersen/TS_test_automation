@@ -1,6 +1,7 @@
 from selenium import webdriver
 import time
 
+
 ###############################################################################
 #                               (Mobile)
 #               This class is written to test functionality and
@@ -58,13 +59,3 @@ class Search(object):
     def filters(self):
         # URL : "m.trendsales.dk/filter"
         print("")
-
-    # Function for verifying inbox
-    def inbox(self):
-        # URL : "m.trendsales.dk/account/conversations"
-        self.driver.get("m.trendsales.dk/account")
-        self.driver.find_element_by_xpath("//div/a[@href='/account/conversations']").click()
-        try:
-            self.driver.find_element_by_xpath("//a[contains(@class, 'list__item')]")
-        except:
-            print("No messages were found in the inbox")

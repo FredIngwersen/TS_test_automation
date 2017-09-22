@@ -1,6 +1,7 @@
 from selenium import webdriver
 import time
 import json
+from config import config
 
 ###############################################################################
 #                               (Mobile)
@@ -18,24 +19,21 @@ class Login(object):
     # Test the user login
     def user_login(self):
 
-        with open("test_user.json") as data_file:
-            data = json.load(data_file)
-
-        # First accept cookies
+        # First, accept cookies
         self.driver.find_element_by_xpath("//a[@data-qa-name='accept-cookies']").click()
         time.sleep(1)
         # Click the "Mit TS" button to enter the login screen    ---  Wanted method is commented out due to front-end variable not yet live
         #self.driver.find_element_by_xpath("//a[@data-qa-name='nav-account']").click()
-        self.driver.get('https://m.trendsales.dk/account')
+        self.driver.get(config.getHostname() + "/account")
         time.sleep(1)
         # Send the login data & press the login buttons
-        self.driver.find_element_by_xpath("//input[@data-qa-name='login-username']").send_keys(data["username"])
-        self.driver.find_element_by_xpath("//input[@data-qa-name='login-password']").send_keys(data["password"])
+        self.driver.find_element_by_xpath("//input[@data-qa-name='login-username']").send_keys(config.getUsername())
+        self.driver.find_element_by_xpath("//input[@data-qa-name='login-password']").send_keys(config.getPassword())
         self.driver.find_element_by_xpath("//a[@data-qa-name='login-submit']").click()
         time.sleep(2)
 
         # Assert login was successful
-        assert data["username"] in self.driver.find_element_by_xpath("//div[@data-qa-name='title']/div[contains(text(),'{}')]".format(data["username"])).text
+        assert config.getUsername() in self.driver.find_element_by_xpath("//div[@data-qa-name='title']/div[contains(text(),'{}')]".format(config.getUsername()).text
         #print("User login is functional")
 
     # Function for verifying landing after login - check certain elements are present

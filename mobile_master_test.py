@@ -3,9 +3,12 @@ from selenium.webdriver.common.keys         import Keys
 from selenium.webdriver.chrome.options      import Options
 from user_login                             import Login
 from search                                 import Search
+from my_TS                                  import MyTS
+from config                                 import config
 import unittest
 import sys
 import time
+
 
 
 # --------------------------------------------------------------------------#
@@ -27,29 +30,41 @@ class Master_Test_TS_Mobile_Chrome(unittest.TestCase):
         # Create driver, pass in the chrome options
         self.driver = webdriver.Chrome(chrome_options=chrome_options)
 
-    # Start the master test for iOS
+    # Start the master test for mobile
     # This function is made up of tests written in seperate class files
     # First, it goes to the TS mobile site, then calls class functions
     def test_mobile_master(self):
         driver = self.driver
 
         # Goto trendsales mobile page
-        driver.get('https://m.trendsales.dk/')
+        driver.get(config.getHostname())
 
-        # Login as a standard user
+        #######################################################################
+        #                       Login and verify landing
+        #######################################################################
         Login(driver).user_login()
-
-        # Secion for verifying elements
         Login(driver).landing()
-        # Goto search
-        #self.driver.find_element_by_xpath("//a[@data-qa-name='nav-search']").click()         #       <---  Waiting for qa variable name
-        driver.get('https://m.trendsales.dk/')
 
-        # This section goes through functionality of the search page
+        #######################################################################
+        #                 Check search page for functionality
+        #######################################################################
+        #self.driver.find_element_by_xpath("//a[@data-qa-name='nav-search']").click()         #       <---  Waiting for qa variable name
+        driver.get(config.getHostname())
         Search(driver).listings()
         Search(driver).toggle()
         Search(driver).search_bar()
         #Search(driver).filters()                 #        <--- Not yet complete
+
+        #######################################################################
+        #                  Check functionality on My TS page
+        #######################################################################
+
+
+        #######################################################################
+        #                Check functionality on the Sell page
+        #######################################################################
+
+
 
     # Anything declared in tearDown will be executed for all test
     def tearDown(self):
