@@ -2,6 +2,14 @@ from selenium import webdriver
 import time
 import json
 
+###############################################################################
+#                               (Mobile)
+#               This class is written to login to Trendsales
+#                   and verify elements on landing page
+#
+###############################################################################
+
+
 class Login(object):
 
     def __init__(self, driver):
@@ -28,4 +36,19 @@ class Login(object):
 
         # Assert login was successful
         assert data["username"] in self.driver.find_element_by_xpath("//div[@data-qa-name='title']/div[contains(text(),'{}')]".format(data["username"])).text
-        print("User login is functional")
+        #print("User login is functional")
+
+    # Function for verifying landing after login - check certain elements are present
+    def landing(self):
+        # This function should be run after login, however, the URL for this funtion is "m.trendsales.dk/account"
+        assert "account" in self.driver.current_url
+        try:
+            self.driver.find_element_by_xpath("//div/a[@href='/account/conversations']")
+            self.driver.find_element_by_xpath("//div/a[@href='/account/transactions']")
+            self.driver.find_element_by_xpath("//div/a[@href='/account/listings/open']")
+            self.driver.find_element_by_xpath("//div/a[@href='/account/trades/buyer']")
+            self.driver.find_element_by_xpath("//div/a[@href='/account/likes']")
+            self.driver.find_element_by_xpath("//div/a[@href='/account/profile']")
+            #print("All elements are present upon landing")
+        except:
+            print("An element was not found in the landing page")

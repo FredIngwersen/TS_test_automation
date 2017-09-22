@@ -2,7 +2,7 @@ from selenium                               import webdriver
 from selenium.webdriver.common.keys         import Keys
 from selenium.webdriver.chrome.options      import Options
 from user_login                             import Login
-from verify_                                import Verify
+from search                                 import Search
 import unittest
 import sys
 import time
@@ -11,7 +11,7 @@ import time
 # --------------------------------------------------------------------------#
 
 # When using the unittest module every test function must start with "_test"
-class Master_Test_TS_iOS_Chrome(unittest.TestCase):
+class Master_Test_TS_Mobile_Chrome(unittest.TestCase):
 
     # Anything declared in setUp will run for all test cases
     def setUp(self):
@@ -30,24 +30,26 @@ class Master_Test_TS_iOS_Chrome(unittest.TestCase):
     # Start the master test for iOS
     # This function is made up of tests written in seperate class files
     # First, it goes to the TS mobile site, then calls class functions
-    def test_iOS_master(self):
+    def test_mobile_master(self):
         driver = self.driver
 
         # Goto trendsales mobile page
         driver.get('https://m.trendsales.dk/')
 
-        # Use the Login class to login
+        # Login as a standard user
         Login(driver).user_login()
 
-        # Use the Verify class to verify some elements
-        Verify(driver).landing()
-        # Goto search 
-        #self.driver.find_element_by_xpath("//a[@data-qa-name='nav-search']").click()
+        # Secion for verifying elements
+        Login(driver).landing()
+        # Goto search
+        #self.driver.find_element_by_xpath("//a[@data-qa-name='nav-search']").click()         #       <---  Waiting for qa variable name
         driver.get('https://m.trendsales.dk/')
-        Verify(driver).listings()
-        Verify(driver).toggle()
-        Verify(driver).search_bar()
-        Verify(driver).filters()
+
+        # This section goes through functionality of the search page
+        Search(driver).listings()
+        Search(driver).toggle()
+        Search(driver).search_bar()
+        #Search(driver).filters()                 #        <--- Not yet complete
 
     # Anything declared in tearDown will be executed for all test
     def tearDown(self):
