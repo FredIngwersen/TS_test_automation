@@ -1,6 +1,7 @@
 import json
 import os
 
+
 ###############################################################################
 #                             (Configuration)
 #              This file is for centralizing variables such
@@ -17,6 +18,7 @@ class Config(object):
 
     def getUsername(self):
         return self.data["username"]
+
     def getPassword(self):
         return self.data["password"]
 
