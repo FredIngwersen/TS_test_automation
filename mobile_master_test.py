@@ -46,7 +46,7 @@ class Master_Test_TS_Mobile_Chrome(unittest.TestCase):
         Login(driver).landing()
 
         #######################################################################
-        #                 Check search page for functionality
+        #                 Check functionality on Search page
         #######################################################################
         #self.driver.find_element_by_xpath("//a[@data-qa-name='nav-search']").click()         #       <---  Waiting for qa variable name
         driver.get(config.getHostname())
@@ -58,12 +58,26 @@ class Master_Test_TS_Mobile_Chrome(unittest.TestCase):
         #######################################################################
         #                  Check functionality on My TS page
         #######################################################################
-
+        MyTS(driver).inbox()
+        MyTS(driver).wallet()
+        #MyTS(driver).listings()                #        <--- Not yet complete
+        #MyTS(driver).open_listings()           #        <--- Not yet complete
+        #MyTS(driver).favourites()              #        <--- Not yet complete
+        #MyTS(driver).profile()                 #        <--- Not yet complete
 
         #######################################################################
         #                Check functionality on the Sell page
         #######################################################################
 
+
+        #######################################################################
+        #                Check functionality on the Activity page
+        #######################################################################
+
+
+        #######################################################################
+        #                Check functionality on the More page
+        #######################################################################
 
 
     # Anything declared in tearDown will be executed for all test
