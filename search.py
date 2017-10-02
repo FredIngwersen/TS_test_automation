@@ -24,7 +24,7 @@ class Search(object):
         except:
             print("Listings were not found")
 
-    # Check the toggle elements are present and functional
+    # Check the toggle view mode elements are present and functional
     def toggle(self):
         # URL : "m.trendsales.dk"
         try:

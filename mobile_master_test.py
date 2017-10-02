@@ -9,7 +9,8 @@ import unittest
 import sys
 import time
 
-
+# If this script fails on live, try on the latest dev build, since we will be adding
+# more and more data-qa-names over time, and they appear in dev first.
 
 # --------------------------------------------------------------------------#
 
@@ -48,8 +49,7 @@ class Master_Test_TS_Mobile_Chrome(unittest.TestCase):
         #######################################################################
         #                 Check functionality on Search page
         #######################################################################
-        #self.driver.find_element_by_xpath("//a[@data-qa-name='nav-search']").click()         #       <---  Waiting for qa variable name
-        driver.get(config.getHostname())
+        self.driver.find_element_by_xpath("//a[@data-qa-name='nav-search']").click()
         Search(driver).listings()
         Search(driver).toggle()
         Search(driver).search_bar()

@@ -22,9 +22,9 @@ class Login(object):
         # First, accept cookies
         self.driver.find_element_by_xpath("//a[@data-qa-name='accept-cookies']").click()
         time.sleep(1)
-        # Click the "Mit TS" button to enter the login screen    ---  Wanted method is commented out due to front-end variable not yet live
-        #self.driver.find_element_by_xpath("//a[@data-qa-name='nav-account']").click()
-        self.driver.get(config.getHostname() + "/account")
+        # Click the "Mit TS" button to enter the login screen
+        self.driver.find_element_by_xpath("//a[@data-qa-name='nav-account']").click()
+
         time.sleep(1)
         # Send the login data & press the login buttons
         self.driver.find_element_by_xpath("//input[@data-qa-name='login-username']").send_keys(config.getUsername())

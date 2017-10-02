@@ -19,17 +19,18 @@ class MyTS(object):
     # For verifying inbox contains elements
     def inbox(self):
         # URL : "m.trendsales.dk/account"
-        self.driver.get(config.getHostname() + "/account")
-        self.driver.find_element_by_xpath("//div/a[@href='/account/conversations']").click()
+        self.driver.find_element_by_xpath("//a[@data-qa-name='nav-account']").click()
         try:
+            self.driver.find_element_by_xpath("//div/a[@href='/account/conversations']").click()
             self.driver.find_element_by_xpath("//a[contains(@class, 'list__item')]")
+            self.driver.find_element_by_xpath("//a[@data-qa-name='paneheader-back']").click()
         except:
             print("No messages were found in the inbox")
 
     # Check account has transactions and withdrawal accounts are present and can be added
     def wallet(self):
         # URL : "m.trendsales.dk/account"
-        self.driver.get(config.getHostname() + "/account")
+        self.driver.find_element_by_xpath("//a[@data-qa-name='nav-account']").click()
 
         # Check account part
         self.driver.find_element_by_xpath("//div/a[@href='/account/transactions']").click()
@@ -39,19 +40,19 @@ class MyTS(object):
             print("No transactions were found in the wallet")
 
         # Check withdrawal part
-        self.driver.find_element_by_xpath("//a[@href='account/transactions/withdraw']").click()
-
         try:
+            self.driver.find_element_by_xpath("//a[@href='account/transactions/withdraw']").click()
             self.driver.find_element_by_xpath("//div[@data-qa-name='option']")
             self.driver.find_element_by_xpath("//a[@data-qa-name='edit-toggle']")
         except:
-            print("No account or edit option found")
+            print("No account or edit option elements found")
 
         try:
             self.driver.find_element_by_xpath("//a[@data-qa-name='edit-toggle']").click()
             self.driver.find_element_by_xpath("//div[@data-qa-name='add-option']").click()
             self.driver.find_element_by_xpath("//div[@data-qa-name='title' and contains(text(), 'Tilføj bankkonto')]")
             self.driver.find_element_by_xpath("//div[@data-qa-name='close']")
+            self.driver.find_element_by_xpath("//a[@data-qa-name='paneheader-back']").click()
             # Click the back button - needs data-qa-name
         except:
             print("Edit or add bank account button is not functional")
