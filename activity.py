@@ -8,3 +8,9 @@ import time
 #               verify elements on the Trendsales activity page
 #
 ###############################################################################
+
+
+class Activity(object):
+
+    def __init__(self, driver):
+        self.driver = driver

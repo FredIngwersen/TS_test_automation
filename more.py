@@ -8,3 +8,9 @@ import time
 #               verify elements on the Trendsales more page
 #
 ###############################################################################
+
+
+class More(object):
+
+    def __init__(self, driver):
+        self.driver = driver

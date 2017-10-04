@@ -33,7 +33,7 @@ class Login(object):
         time.sleep(2)
 
         # Assert login was successful
-        assert config.getUsername() in self.driver.find_element_by_xpath("//div[@data-qa-name='title']/div[contains(text(),'{}')]".format(config.getUsername()).text
+        assert config.getUsername() in self.driver.find_element_by_xpath("//div[@data-qa-name='title']/div[contains(text(),'{}')]".format(config.getUsername())).text
         #print("User login is functional")
 
     # Function for verifying landing after login - check certain elements are present

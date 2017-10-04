@@ -17,7 +17,9 @@ class Search(object):
 
     # Check listings are present in search
     def listings(self):
-        # URL : "m.trendsales.dk"
+        # URL : base-url
+        self.driver.get(config.getHostname())
+        time.sleep(1)
         try:
             self.driver.find_element_by_xpath("//a[@data-qa-name='listing-item']")
             #print("Listings are present")
@@ -26,7 +28,9 @@ class Search(object):
 
     # Check the toggle view mode elements are present and functional
     def toggle(self):
-        # URL : "m.trendsales.dk"
+        # URL : base-url
+        self.driver.get(config.getHostname())
+        time.sleep(1)
         try:
             self.driver.find_element_by_xpath("//div[@data-qa-name='view-mode']")
             self.driver.find_element_by_xpath("//a[@data-qa-name='listing-item' and contains(@class, 'listitem__listingItem')]")
@@ -44,7 +48,9 @@ class Search(object):
 
     # Check search bar present and functional
     def search_bar(self):
-        # URL : "m.trendsales.dk"
+        # URL : base-url
+        self.driver.get(config.getHostname())
+        time.sleep(1)
         try:
             self.driver.find_element_by_xpath("//input[@data-qa-name='tagbar-input']")
             self.driver.find_element_by_xpath("//input[@data-qa-name='tagbar-input']").send_keys("jakker")
@@ -57,5 +63,7 @@ class Search(object):
 
     # Function for verifying filters
     def filters(self):
-        # URL : "m.trendsales.dk/filter"
+        # URL : base-url/filter
+        driver.get(config.getHostname() + "/filter")
+        time.sleep(1)
         print("")

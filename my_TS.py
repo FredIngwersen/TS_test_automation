@@ -18,10 +18,13 @@ class MyTS(object):
 
     # For verifying inbox contains elements
     def inbox(self):
-        # URL : "m.trendsales.dk/account"
-        self.driver.find_element_by_xpath("//a[@data-qa-name='nav-account']").click()
+        # URL : base-url/account
+        self.driver.get(config.getHostname() + "/account")
+        time.sleep(1)
+
         try:
             self.driver.find_element_by_xpath("//div/a[@href='/account/conversations']").click()
+            time.sleep(1)
             self.driver.find_element_by_xpath("//a[contains(@class, 'list__item')]")
             self.driver.find_element_by_xpath("//a[@data-qa-name='paneheader-back']").click()
         except:
@@ -29,12 +32,14 @@ class MyTS(object):
 
     # Check account has transactions and withdrawal accounts are present and can be added
     def wallet(self):
-        # URL : "m.trendsales.dk/account"
-        self.driver.find_element_by_xpath("//a[@data-qa-name='nav-account']").click()
+        # URL : base-url/account
+        self.driver.get(config.getHostname() + "/account")
+        time.sleep(1)
 
         # Check account part
-        self.driver.find_element_by_xpath("//div/a[@href='/account/transactions']").click()
         try:
+            self.driver.find_element_by_xpath("//div/a[@href='/account/transactions']").click()
+            time.sleep(1)
             self.driver.find_element_by_xpath("//div[contains(@class, 'list__item')]")
         except:
             print("No transactions were found in the wallet")
@@ -42,6 +47,7 @@ class MyTS(object):
         # Check withdrawal part
         try:
             self.driver.find_element_by_xpath("//a[@href='account/transactions/withdraw']").click()
+            time.sleep(1)
             self.driver.find_element_by_xpath("//div[@data-qa-name='option']")
             self.driver.find_element_by_xpath("//a[@data-qa-name='edit-toggle']")
         except:
@@ -58,8 +64,9 @@ class MyTS(object):
             print("Edit or add bank account button is not functional")
 
     def  listings(self):
-        # URL : "m.trendsales.dk/account"
+        # URL : base-url/account
         self.driver.get(config.getHostname() + "/account")
+        time.sleep(1)
 
         self.driver.find_element_by_xpath("//div/a[@href='/account/listings/open']").click()
 

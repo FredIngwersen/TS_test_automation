@@ -1,10 +1,14 @@
+# Selenium framework
 from selenium                               import webdriver
 from selenium.webdriver.common.keys         import Keys
 from selenium.webdriver.chrome.options      import Options
+# Test cases
 from user_login                             import Login
 from search                                 import Search
 from my_TS                                  import MyTS
+from nav_bar                                import NavBar
 from config                                 import config
+# Other utils
 import unittest
 import sys
 import time
@@ -20,7 +24,7 @@ class Master_Test_TS_Mobile_Chrome(unittest.TestCase):
     # Anything declared in setUp will run for all test cases
     def setUp(self):
         # More information at: https://sites.google.com/a/chromium.org/chromedriver/mobile-emulation
-        mobile_emulation = {"deviceName": "iPhone 6 Plus"}
+        mobile_emulation = {"deviceName": "Nexus 6P"}
 
         # A variable to hold the configurations
         chrome_options = webdriver.ChromeOptions()
@@ -50,14 +54,18 @@ class Master_Test_TS_Mobile_Chrome(unittest.TestCase):
         #                 Check functionality on Search page
         #######################################################################
         self.driver.find_element_by_xpath("//a[@data-qa-name='nav-search']").click()
+        time.sleep(3)
         Search(driver).listings()
+        time.sleep(1)
         Search(driver).toggle()
+        time.sleep(1)
         Search(driver).search_bar()
         #Search(driver).filters()                 #        <--- Not yet complete
 
         #######################################################################
         #                  Check functionality on My TS page
         #######################################################################
+        time.sleep(1)
         MyTS(driver).inbox()
         MyTS(driver).wallet()
         #MyTS(driver).listings()                #        <--- Not yet complete
